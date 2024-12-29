@@ -1,12 +1,12 @@
-use antbook::chapter1::ants::solve;
+use antbook::chapter1::lottery::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        l: usize,
         n: usize,
-        a_list: [usize; n],
+        m: usize,
+        k_list: [usize; n],
     }
-    let (min, max) = solve(l, a_list);
-    println!("{min} {max}");
+    let ans = solve(m, k_list);
+    println!("{ans}");
 }
