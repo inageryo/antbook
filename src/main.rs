@@ -1,12 +1,13 @@
-use antbook::chapter2::partial_sum::solve;
+use antbook::chapter2::lake_counting::solve;
 use proconio::input;
+use proconio::marker::Chars;
 
 fn main() {
     input! {
-        n: isize,
-        a_list: [isize; n],
-        k: isize,
+        n: usize,
+        m: usize,
+        mut garden: [Chars; n],
     }
-    let ans = solve(&a_list, k);
+    let ans = solve(n, m, &mut garden);
     println!("{ans}");
 }
