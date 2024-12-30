@@ -1,4 +1,4 @@
-use antbook::chapter2::maze::solve;
+use antbook::chapter2::section1::maze::solve;
 use proconio::input;
 use proconio::marker::Chars;
 
