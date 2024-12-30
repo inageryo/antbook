@@ -1,13 +1,16 @@
-use antbook::chapter2::section1::maze::solve;
+use antbook::chapter2::section2::coins::solve;
 use proconio::input;
-use proconio::marker::Chars;
 
 fn main() {
     input! {
-        n: usize,
-        m: usize,
-        mut maze: [Chars; n],
+        c1: usize,
+        c5: usize,
+        c10: usize,
+        c50: usize,
+        c100: usize,
+        c500: usize,
+        a: usize
     }
-    let ans = solve(n, m, &maze);
+    let ans = solve(c1, c5, c10, c50, c100, c500, a);
     println!("{ans}");
 }
