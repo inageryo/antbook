@@ -1,11 +1,12 @@
-use antbook::chapter2::section2::best_cow_line::solve;
+use antbook::chapter2::section2::sarumans_army::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        _n: usize,
-        s: String,
+        n: usize,
+        r: usize,
+        x_lsit: [usize; n],
     }
-    let ans = solve(s);
+    let ans = solve(r, &x_lsit);
     println!("{ans}");
 }
