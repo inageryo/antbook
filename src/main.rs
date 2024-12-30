@@ -1,12 +1,11 @@
-use antbook::chapter2::section2::sarumans_army::solve;
+use antbook::chapter2::section2::fence_repair::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        r: usize,
-        x_lsit: [usize; n],
+        l_lsit: [usize; n],
     }
-    let ans = solve(r, &x_lsit);
+    let ans = solve(&l_lsit);
     println!("{ans}");
 }
