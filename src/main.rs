@@ -1,12 +1,11 @@
-use antbook::chapter2::section2::scheduling::solve;
+use antbook::chapter2::section2::best_cow_line::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        n: usize,
-        s: [usize; n],
-        t: [usize; n],
+        _n: usize,
+        s: String,
     }
-    let ans = solve(n, &s, &t);
+    let ans = solve(s);
     println!("{ans}");
 }
