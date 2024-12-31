@@ -1,4 +1,4 @@
-use antbook::chapter2::section3::knapsack_unlimited::solve;
+use antbook::chapter2::section3::knapsack_2::solve;
 use proconio::input;
 
 fn main() {
