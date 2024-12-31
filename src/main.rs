@@ -1,11 +1,12 @@
-use antbook::chapter2::section2::fence_repair::solve;
+use antbook::chapter2::section3::knapsack::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        l_lsit: [usize; n],
+        l: [(usize, usize); n],
+        w: usize,
     }
-    let ans = solve(&l_lsit);
+    let ans = solve(n, &l, w);
     println!("{ans}");
 }
