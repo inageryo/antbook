@@ -1,3 +1,4 @@
+pub mod combination_with_replacement;
 pub mod knapsack;
 pub mod knapsack_2;
 pub mod knapsack_unlimited;
