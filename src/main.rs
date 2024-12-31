@@ -1,14 +1,12 @@
-use antbook::chapter2::section3::lcs::solve;
+use antbook::chapter2::section3::knapsack_unlimited::solve;
 use proconio::input;
-use proconio::marker::Chars;
 
 fn main() {
     input! {
         n: usize,
-        m: usize,
-        s: Chars,
-        t: Chars,
+        l: [(usize, usize); n],
+        w: usize,
     }
-    let ans = solve(n, m, &s, &t);
+    let ans = solve(n, &l, w);
     println!("{ans}");
 }
