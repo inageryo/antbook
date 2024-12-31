@@ -1,11 +1,12 @@
-use antbook::chapter2::section3::lis::solve;
+use antbook::chapter2::section3::partial_function::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        a_list: [usize; n],
+        m: usize,
+        md: usize
     }
-    let ans = solve(n, &a_list);
+    let ans = solve(n, m, md);
     println!("{ans}");
 }
