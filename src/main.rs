@@ -1,13 +1,14 @@
-use antbook::chapter2::section3::combination_with_replacement::solve;
+use antbook::chapter2::section4::expedition::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        m: usize,
+        l: usize,
+        p: usize,
         a_list: [usize; n],
-        md: usize
+        b_list: [usize; n],
     }
-    let ans = solve(n, m, &a_list, md);
+    let ans = solve(n, l, p, &a_list, &b_list);
     println!("{ans}");
 }
