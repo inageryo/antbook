@@ -1,10 +1,11 @@
-use antbook::chapter2::section6::count_prime::solve;
+use antbook::chapter2::section6::segmented_sieve::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        n: usize,
+        a: usize,
+        b: usize,
     }
-    let ans = solve(n);
+    let ans = solve(a, b);
     println!("{ans}");
 }
