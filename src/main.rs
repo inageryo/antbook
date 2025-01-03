@@ -1,11 +1,13 @@
-use antbook::chapter2::section6::sugoroku::solve;
+use antbook::chapter2::section6::is_prime::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        a: usize,
-        b: usize
+        n: usize,
     }
-    let ans = solve(a, b);
-    println!("{ans}");
+    if solve(n) {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
