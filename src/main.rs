@@ -1,11 +1,11 @@
-use antbook::chapter2::section6::lattice::solve;
+use antbook::chapter2::section6::sugoroku::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        p1: (isize, isize),
-        p2: (isize, isize)
+        a: usize,
+        b: usize
     }
-    let ans = solve(p1, p2);
+    let ans = solve(a, b);
     println!("{ans}");
 }
