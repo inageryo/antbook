@@ -1,15 +1,11 @@
-use antbook::chapter2::section5::layout::solve;
+use antbook::chapter2::section6::lattice::solve;
 use proconio::input;
-use proconio::marker::Usize1;
 
 fn main() {
     input! {
-        n: usize,
-        ml: usize,
-        md: usize,
-        l_list: [(Usize1, Usize1, usize); ml],
-        d_list: [(Usize1, Usize1, usize); md],
+        p1: (isize, isize),
+        p2: (isize, isize)
     }
-    let ans = solve(n, &l_list, &d_list);
+    let ans = solve(p1, p2);
     println!("{ans}");
 }
