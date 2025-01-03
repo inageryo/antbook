@@ -1,3 +1,4 @@
+pub mod carmichael_numbers;
 pub mod count_prime;
 pub mod is_prime;
 pub mod lattice;

@@ -1,11 +1,13 @@
-use antbook::chapter2::section6::segmented_sieve::solve;
+use antbook::chapter2::section6::carmichael_numbers::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        a: usize,
-        b: usize,
+        n: usize,
     }
-    let ans = solve(a, b);
-    println!("{ans}");
+    if solve(n) {
+        println!("Yes");
+    } else {
+        println!("No");
+    }
 }
