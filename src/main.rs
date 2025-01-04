@@ -1,12 +1,11 @@
-use antbook::chapter2::section7::minimum_scalar_product::solve;
+use antbook::chapter2::section7::crazy_rows::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        mut v1: [isize; n],
-        mut v2: [isize; n],
+        mut matrix: [[u8; n]; n],
     }
-    let ans = solve(n, &mut v1, &mut v2);
+    let ans = solve(n, &mut matrix);
     println!("{ans}");
 }
