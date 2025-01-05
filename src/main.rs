@@ -1,12 +1,12 @@
-use antbook::chapter2::section7::millionaire::solve;
+use antbook::chapter3::section1::lower_bound::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        m: usize,
-        p: f64,
-        x: usize,
+        n: usize,
+        a_list: [usize; n],
+        k: usize
     }
-    let ans = solve(m, p, x);
+    let ans = solve(&a_list, k);
     println!("{ans}");
 }
