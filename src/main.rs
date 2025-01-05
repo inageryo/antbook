@@ -1,12 +1,12 @@
-use antbook::chapter3::section1::lower_bound::solve;
+use antbook::chapter3::section1::cable_master::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        a_list: [usize; n],
-        k: usize
+        k: usize,
+        l_list: [f64; n],
     }
-    let ans = solve(&a_list, k);
-    println!("{ans}");
+    let ans = solve(k, &l_list);
+    println!("{:.2}", ans);
 }
