@@ -1,11 +1,11 @@
-use antbook::chapter3::section1::maximize_average::solve;
+use antbook::chapter3::section2::two_pointer::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        k: usize,
-        mut items: [(usize, usize); n],
+        s: usize,
+        mut items: [usize; n],
     }
-    println!("{}", solve(k, &mut items));
+    println!("{}", solve(n, s, &items));
 }
