@@ -1,38 +1,44 @@
 use itertools::Itertools;
 
 pub fn solve(n: usize, cows: &[char]) -> (usize, usize) {
-    // fixme: too slow
     if cows.iter().unique().count() == 1 && cows[0] == 'F' {
         return (0, 0);
     }
     let mut k = 0;
     let mut m = usize::MAX;
     for i in 1..n {
-        let mut cows = cows.to_owned();
-        let mut p = 0;
-        let mut count = 0usize;
-        while p < n {
-            if cows[p] == 'F' {
-                p += 1;
-            } else if p + i - 1 < n {
-                for j in 0..i {
-                    if cows[p + j] == 'F' {
-                        cows[p + j] = 'B';
-                    } else {
-                        cows[p + j] = 'F';
-                    }
-                }
-                count += 1;
-            } else {
-                break;
-            }
-        }
-        if p == n && count < m {
-            m = count;
+        let count = get_count(i, n, cows);
+        if count >= 0 && (count as usize) < m {
+            m = count as usize;
             k = i;
         }
     }
     (k, m)
+}
+
+fn get_count(k: usize, n: usize, cows: &[char]) -> isize {
+    let mut ans = 0;
+    let mut s = 0usize;
+    let mut f = vec![0; n - k + 1];
+    for i in 0..n - k + 1 {
+        if s % 2 == 0 && cows[i] == 'B' || s % 2 == 1 && cows[i] == 'F' {
+            f[i] = 1;
+            ans += 1;
+        }
+        s += f[i];
+        if i + 1 >= k {
+            s -= f[i + 1 - k];
+        }
+    }
+    for i in n - k + 1..n {
+        if s % 2 == 0 && cows[i] == 'B' || s % 2 == 1 && cows[i] == 'F' {
+            return -1;
+        }
+        if i + 1 >= k {
+            s -= f[i + 1 - k];
+        }
+    }
+    ans
 }
 
 #[cfg(test)]
