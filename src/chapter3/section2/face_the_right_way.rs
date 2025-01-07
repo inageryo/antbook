@@ -7,16 +7,17 @@ pub fn solve(n: usize, cows: &[char]) -> (usize, usize) {
     let mut k = 0;
     let mut m = usize::MAX;
     for i in 1..n {
-        let count = get_count(i, n, cows);
-        if count >= 0 && (count as usize) < m {
-            m = count as usize;
-            k = i;
+        if let Some(count) = get_count(i, n, cows) {
+            if count < m {
+                m = count;
+                k = i;
+            }
         }
     }
     (k, m)
 }
 
-fn get_count(k: usize, n: usize, cows: &[char]) -> isize {
+fn get_count(k: usize, n: usize, cows: &[char]) -> Option<usize> {
     let mut ans = 0;
     let mut s = 0usize;
     let mut f = vec![0; n - k + 1];
@@ -32,13 +33,13 @@ fn get_count(k: usize, n: usize, cows: &[char]) -> isize {
     }
     for i in n - k + 1..n {
         if s % 2 == 0 && cows[i] == 'B' || s % 2 == 1 && cows[i] == 'F' {
-            return -1;
+            return None;
         }
         if i + 1 >= k {
             s -= f[i + 1 - k];
         }
     }
-    ans
+    Some(ans)
 }
 
 #[cfg(test)]
