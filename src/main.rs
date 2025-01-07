@@ -1,11 +1,10 @@
-use antbook::chapter3::section2::two_pointer::solve;
+use antbook::chapter3::section2::reading_problem::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        n: usize,
-        s: usize,
-        mut items: [usize; n],
+        p: usize,
+        a_list: [usize; p],
     }
-    println!("{}", solve(n, s, &items));
+    println!("{}", solve(p, &a_list));
 }
