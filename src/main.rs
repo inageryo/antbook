@@ -1,10 +1,12 @@
-use antbook::chapter3::section2::reading_problem::solve;
+use antbook::chapter3::section2::face_the_right_way::solve;
 use proconio::input;
+use proconio::marker::Chars;
 
 fn main() {
     input! {
-        p: usize,
-        a_list: [usize; p],
+        n: usize,
+        cows: Chars,
     }
-    println!("{}", solve(p, &a_list));
+    let (k, m) = solve(n, &cows);
+    println!("{k} {m}",);
 }
