@@ -1,19 +1,13 @@
-use antbook::chapter3::section2::physics_experiment::solve;
-use itertools::Itertools;
+use antbook::chapter3::section2::four_values_whose_sum_is_zero::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        h: usize,
-        r: usize,
-        t: usize,
+        a_list: [isize; n],
+        b_list: [isize; n],
+        c_list: [isize; n],
+        d_list: [isize; n],
     }
-    println!(
-        "{}",
-        solve(n, h, r, t)
-            .iter()
-            .map(|x| { format!("{:.2}", x) })
-            .join(" ")
-    );
+    println!("{}", solve(&a_list, &b_list, &c_list, &d_list));
 }
