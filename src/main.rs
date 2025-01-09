@@ -1,16 +1,19 @@
-use antbook::chapter3::section2::flip_tile::solve;
+use antbook::chapter3::section2::physics_experiment::solve;
 use itertools::Itertools;
 use proconio::input;
 
 fn main() {
     input! {
-        m: usize,
         n: usize,
-        tiles: [[usize; n]; m],
+        h: usize,
+        r: usize,
+        t: usize,
     }
-    if let Some(ans) = solve(m, n, &tiles) {
-        ans.iter().for_each(|a| println!("{}", a.iter().join(" ")));
-    } else {
-        println!("IMPOSSIBLE");
-    }
+    println!(
+        "{}",
+        solve(n, h, r, t)
+            .iter()
+            .map(|x| { format!("{:.2}", x) })
+            .join(" ")
+    );
 }
