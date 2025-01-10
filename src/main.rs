@@ -1,12 +1,15 @@
-use antbook::chapter3::section2::huge_knapsack::solve;
+use antbook::chapter3::section2::count_realm::solve;
 use proconio::input;
 
 fn main() {
     input! {
+        w: usize,
+        h: usize,
         n: usize,
-        w_list: [usize; n],
-        v_list: [usize; n],
-        w_limit: usize
+        mut x1: [usize; n],
+        mut x2: [usize; n],
+        mut y1: [usize; n],
+        mut y2: [usize; n],
     }
-    println!("{}", solve(n, &w_list, &v_list, w_limit));
+    println!("{}", solve(w, h, n, &mut x1, &mut x2, &mut y1, &mut y2));
 }
