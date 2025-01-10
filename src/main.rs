@@ -1,13 +1,12 @@
-use antbook::chapter3::section2::four_values_whose_sum_is_zero::solve;
+use antbook::chapter3::section2::huge_knapsack::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        a_list: [isize; n],
-        b_list: [isize; n],
-        c_list: [isize; n],
-        d_list: [isize; n],
+        w_list: [usize; n],
+        v_list: [usize; n],
+        w_limit: usize
     }
-    println!("{}", solve(&a_list, &b_list, &c_list, &d_list));
+    println!("{}", solve(n, &w_list, &v_list, w_limit));
 }
