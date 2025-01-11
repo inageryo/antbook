@@ -1,3 +1,4 @@
+pub mod bit;
 pub mod gcd;
 pub mod moduler;
 pub mod prime;
