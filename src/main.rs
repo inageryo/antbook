@@ -1,15 +1,16 @@
-use antbook::chapter3::section2::count_realm::solve;
+use antbook::chapter3::section3::crane::solve;
 use proconio::input;
+use proconio::marker::Usize1;
 
 fn main() {
     input! {
-        w: usize,
-        h: usize,
         n: usize,
-        mut x1: [usize; n],
-        mut x2: [usize; n],
-        mut y1: [usize; n],
-        mut y2: [usize; n],
+        c: usize,
+        l_list: [usize; n],
+        s_list: [Usize1; c],
+        c_list: [usize; c],
     }
-    println!("{}", solve(w, h, n, &mut x1, &mut x2, &mut y1, &mut y2));
+    for e in solve(n, c, &l_list, &s_list, &c_list) {
+        println!("{} {}", e.0, e.1);
+    }
 }
