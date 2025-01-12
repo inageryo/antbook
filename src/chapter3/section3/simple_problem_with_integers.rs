@@ -1,3 +1,5 @@
+use crate::common::bit::BIT;
+
 pub fn solve(
     n: usize,
     a_list: &[usize],
@@ -6,48 +8,34 @@ pub fn solve(
     l_list: &[usize],
     r_list: &[usize],
     x_list: &[usize],
-) -> Vec<usize> {
-    let mut size = 1;
-    while size < n {
-        size *= 2;
+) -> Vec<isize> {
+    let mut bit0 = BIT::new(n);
+    let mut bit1 = BIT::new(n);
+    for (i, e) in a_list.iter().enumerate() {
+        let i = i + 1;
+        bit0.add(i, -((*e * (i - 1)) as isize));
+        bit1.add(i, *e as isize);
+        bit0.add(i + 1, (*e * i) as isize);
+        bit1.add(i + 1, -(*e as isize));
     }
-    let mut tree = vec![(0usize, 0usize); 2 * size - 1];
     let mut ans = vec![];
-    for (i, a) in a_list.iter().enumerate() {
-        update(i, i + 1, *a, 0, 0, size, &mut tree);
-    }
     for i in 0..q {
+        let l = l_list[i] + 1;
+        let r = r_list[i] + 1;
+        let x = x_list[i] as isize;
         if t_list[i] == 'C' {
-            update(l_list[i], r_list[i] + 1, x_list[i], 0, 0, size, &mut tree);
+            bit0.add(l, -x * (l - 1) as isize);
+            bit1.add(l, x);
+            bit0.add(r + 1, x * r as isize);
+            bit1.add(r + 1, -x);
         } else {
-            ans.push(sum(l_list[i], r_list[i] + 1, 0, 0, size, &tree));
+            ans.push(
+                bit1.sum(r) * r as isize + bit0.sum(r)
+                    - (bit1.sum(l - 1) * (l - 1) as isize + bit0.sum(l - 1)),
+            );
         }
     }
     ans
-}
-
-// add x to [a, b)
-fn update(a: usize, b: usize, x: usize, k: usize, l: usize, r: usize, tree: &mut [(usize, usize)]) {
-    if a <= l && r <= b {
-        tree[k].1 += x;
-    } else if l < b && a < r {
-        tree[k].0 += (b.min(r) - a.max(l)) * x;
-        update(a, b, x, 2 * k + 1, l, (l + r) / 2, tree);
-        update(a, b, x, 2 * k + 2, (l + r) / 2, r, tree);
-    }
-}
-
-// sum of [a, b)
-fn sum(a: usize, b: usize, k: usize, l: usize, r: usize, tree: &[(usize, usize)]) -> usize {
-    if b <= l || r <= a {
-        0
-    } else if a <= l && r <= b {
-        tree[k].1 * (r - l) + tree[k].0
-    } else {
-        (b.min(r) - a.max(l)) * tree[k].1
-            + sum(a, b, k * 2 + 1, l, (l + r) / 2, tree)
-            + sum(a, b, k * 2 + 2, (l + r) / 2, r, tree)
-    }
 }
 
 #[cfg(test)]
@@ -69,7 +57,7 @@ mod tests {
         #[case] l_list: &[usize],
         #[case] r_list: &[usize],
         #[case] x_list: &[usize],
-        #[case] expected: Vec<usize>,
+        #[case] expected: Vec<isize>,
     ) {
         assert_eq!(
             expected,
