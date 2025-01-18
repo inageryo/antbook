@@ -1,4 +1,4 @@
-use crate::common::moduler::mod_pow;
+use crate::common::modular::mod_pow;
 use crate::common::prime::is_prime;
 
 pub fn solve(n: usize) -> bool {
