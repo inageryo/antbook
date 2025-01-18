@@ -1,12 +1,9 @@
-use antbook::chapter3::section4::domino::solve;
+use antbook::chapter3::section4::fibonacci::solve;
 use proconio::input;
-use proconio::marker::Chars;
 
 fn main() {
     input! {
-        n: usize,
-        m: usize,
-        matrix: [Chars; n]
+        n: usize
     }
-    println!("{}", solve(n, m, &matrix));
+    println!("{}", solve(n));
 }
