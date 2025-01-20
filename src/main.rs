@@ -1,4 +1,4 @@
-use antbook::chapter3::section4::fibonacci::solve;
+use antbook::chapter3::section4::blocks::solve;
 use proconio::input;
 
 fn main() {
