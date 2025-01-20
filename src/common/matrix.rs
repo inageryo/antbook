@@ -27,6 +27,18 @@ pub fn mod_pow(a: &[Vec<usize>], n: usize, m: usize) -> Vec<Vec<usize>> {
     res
 }
 
+pub fn transpose(a: &[Vec<usize>]) -> Vec<Vec<usize>> {
+    let n = a.len();
+    let m = a[0].len();
+    let mut res = vec![vec![0; n]; m];
+    for (i, ai) in a.iter().enumerate() {
+        for j in 0..m {
+            res[j][i] = ai[j];
+        }
+    }
+    res
+}
+
 #[cfg(test)]
 mod tests {
     use rstest::rstest;
@@ -63,5 +75,13 @@ mod tests {
         #[case] expected: Vec<Vec<usize>>,
     ) {
         assert_eq!(expected, mod_pow(a, n, m));
+    }
+
+    #[rstest]
+    #[case(&[vec![1, 2, 3], vec![4, 5, 6]], vec![vec![1, 4], vec![2, 5], vec![3, 6]])]
+    #[case(&[vec![1]], vec![vec![1]])]
+    #[case(&[vec![1, 2], vec![3, 4]], vec![vec![1, 3], vec![2, 4]])]
+    fn transpose_works(#[case] a: &[Vec<usize>], #[case] expected: Vec<Vec<usize>>) {
+        assert_eq!(expected, transpose(a));
     }
 }

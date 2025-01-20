@@ -1,9 +1,11 @@
-use antbook::chapter3::section4::blocks::solve;
+use antbook::chapter3::section4::count_path::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        n: usize
+        n: usize,
+        k: usize,
+        graph: [[usize; n]; n]
     }
-    println!("{}", solve(n));
+    println!("{}", solve(n, k, &graph));
 }
