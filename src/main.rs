@@ -1,15 +1,12 @@
-use antbook::chapter3::section4::matrix_power_series::solve;
-use itertools::Itertools;
+use antbook::chapter3::section4::minimizing_maximizer::solve;
 use proconio::input;
+use proconio::marker::Usize1;
 
 fn main() {
     input! {
         n: usize,
-        k: usize,
         m: usize,
-        a: [[usize; n]; n]
+        list: [(Usize1, Usize1); m]
     }
-    for v in solve(n, k, m, &a) {
-        println!("{}", v.iter().join(" "));
-    }
+    println!("{}", solve(n, &list));
 }
