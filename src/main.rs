@@ -1,12 +1,13 @@
-use antbook::chapter3::section4::minimizing_maximizer::solve;
+use antbook::chapter3::section5::max_traffic::solve;
 use proconio::input;
-use proconio::marker::Usize1;
 
 fn main() {
     input! {
         n: usize,
-        m: usize,
-        list: [(Usize1, Usize1); m]
+        s: usize,
+        t: usize,
+        e: usize,
+        network: [(usize, usize, usize); e]
     }
-    println!("{}", solve(n, &list));
+    println!("{}", solve(n, s, t, &network));
 }
