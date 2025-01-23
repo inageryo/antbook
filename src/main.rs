@@ -1,13 +1,11 @@
-use antbook::chapter3::section5::max_traffic::solve;
+use antbook::chapter3::section5::job_allocation::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        s: usize,
-        t: usize,
-        e: usize,
-        network: [(usize, usize, usize); e]
+        k: usize,
+        can: [[bool; k]; n]
     }
-    println!("{}", solve(n, s, t, &network));
+    println!("{}", solve(n, k, &can));
 }
