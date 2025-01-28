@@ -1,11 +1,18 @@
-use antbook::chapter3::section5::job_allocation::solve;
+use antbook::chapter3::section5::minimum_cost::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        k: usize,
-        can: [[bool; k]; n]
+        s: usize,
+        t: usize,
+        f: usize,
+        e: usize,
+        network: [(usize, usize, usize, usize); e]
     }
-    println!("{}", solve(n, k, &can));
+    if let Some(ans) = solve(n, s, t, f, &network) {
+        println!("{}", ans);
+    } else {
+        println!("impossible");
+    }
 }
