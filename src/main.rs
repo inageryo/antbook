@@ -1,4 +1,4 @@
-use antbook::chapter3::section5::minimum_cost::solve;
+use antbook::chapter3::section5::minimum_cost_2::solve;
 use proconio::input;
 
 fn main() {
