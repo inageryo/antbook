@@ -1,18 +1,12 @@
-use antbook::chapter3::section5::minimum_cost_2::solve;
+use antbook::chapter3::section5::asteroids::solve;
 use proconio::input;
+use proconio::marker::Usize1;
 
 fn main() {
     input! {
         n: usize,
-        s: usize,
-        t: usize,
-        f: usize,
-        e: usize,
-        network: [(usize, usize, usize, usize); e]
+        k: usize,
+        positions: [(Usize1, Usize1); k]
     }
-    if let Some(ans) = solve(n, s, t, f, &network) {
-        println!("{}", ans);
-    } else {
-        println!("impossible");
-    }
+    println!("{}", solve(n, &positions));
 }
