@@ -1,8 +1,8 @@
 pub struct BipartileGraph {
     n: usize,
-    graph: Vec<Vec<usize>>,
-    matching: Vec<isize>,
-    used: Vec<bool>,
+    pub(crate) graph: Vec<Vec<usize>>,
+    pub(crate) matching: Vec<isize>,
+    pub(crate) used: Vec<bool>,
 }
 
 impl BipartileGraph {
@@ -20,7 +20,7 @@ impl BipartileGraph {
         self.graph[to].push(from);
     }
 
-    fn dfs(&mut self, v: usize) -> bool {
+    pub fn dfs(&mut self, v: usize) -> bool {
         self.used[v] = true;
         for i in 0..self.graph[v].len() {
             let e = self.graph[v][i];

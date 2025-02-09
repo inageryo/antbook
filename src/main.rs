@@ -1,12 +1,16 @@
-use antbook::chapter3::section5::asteroids::solve;
+use antbook::chapter3::section5::evacuation::solve;
 use proconio::input;
-use proconio::marker::Usize1;
+use proconio::marker::Chars;
 
 fn main() {
     input! {
-        n: usize,
-        k: usize,
-        positions: [(Usize1, Usize1); k]
+        x: usize,
+        y: usize,
+        positions: [Chars; x]
     }
-    println!("{}", solve(n, &positions));
+    if let Some(ans) = solve(x, y, &positions) {
+        println!("{}", ans);
+    } else {
+        println!("impossible");
+    }
 }
