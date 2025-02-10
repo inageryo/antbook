@@ -99,11 +99,6 @@ mod tests {
         #[case] network: &[(usize, usize, usize, usize)],
         #[case] expected: Option<usize>,
     ) {
-        if let Some(actual) = solve(n, s, t, f, network) {
-            let expected = expected.unwrap();
-            assert_eq!(expected, actual);
-        } else {
-            assert!(expected.is_none());
-        }
+        assert_eq!(expected, solve(n, s, t, f, network));
     }
 }

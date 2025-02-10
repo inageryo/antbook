@@ -84,11 +84,6 @@ mod tests {
         #[case] field: &[Vec<char>],
         #[case] expected: Option<usize>,
     ) {
-        if let Some(actual) = solve(x, y, &field) {
-            let expected = expected.unwrap();
-            assert_eq!(expected, actual);
-        } else {
-            assert!(expected.is_none());
-        }
+        assert_eq!(expected, solve(x, y, &field));
     }
 }
