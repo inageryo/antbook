@@ -1,4 +1,5 @@
 pub mod asteroids;
+pub mod dining;
 pub mod evacuation;
 pub mod job_allocation;
 pub mod max_traffic;
