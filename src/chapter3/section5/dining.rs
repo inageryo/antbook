@@ -1,3 +1,5 @@
+use crate::common::max_flow::MaxFlow;
+
 pub fn solve(
     n: usize,
     f: usize,
@@ -5,72 +7,29 @@ pub fn solve(
     food_preference: &[(usize, usize)],
     drink_preference: &[(usize, usize)],
 ) -> usize {
-    // fixme matrix -> list
     let v_count = f + 2 * n + d + 2;
-    let mut graph = vec![vec![-1; v_count]; v_count];
+    let mut max_flow = MaxFlow::new(v_count);
     for i in 1..=f {
-        graph[0][i] = 1;
-        graph[i][0] = 0;
+        max_flow.add_edge(0, i, 1);
+        max_flow.add_edge(i, 0, 0);
     }
     for (i, j) in food_preference {
-        graph[1 + *j][f + 1 + *i] = 1;
-        graph[f + 1 + *i][1 + *j] = 0;
+        max_flow.add_edge(1 + *j, f + 1 + *i, 1);
+        max_flow.add_edge(f + 1 + *i, 1 + *j, 0);
     }
     for i in 1..=n {
-        graph[f + i][f + n + i] = 1;
-        graph[f + n + i][f + i] = 0;
+        max_flow.add_edge(f + i, f + n + i, 1);
+        max_flow.add_edge(f + n + i, f + i, 0);
     }
     for (i, j) in drink_preference {
-        graph[f + n + 1 + *i][f + 2 * n + 1 + *j] = 1;
-        graph[f + 2 * n + 1 + *j][f + n + 1 + *i] = 0;
+        max_flow.add_edge(f + n + 1 + *i, f + 2 * n + 1 + *j, 1);
+        max_flow.add_edge(f + 2 * n + 1 + *j, f + n + 1 + *i, 0);
     }
     for i in 1..=d {
-        graph[f + 2 * n + i][f + 2 * n + d + 1] = 1;
-        graph[f + 2 * n + d + 1][f + 2 * n + i] = 0;
+        max_flow.add_edge(f + 2 * n + i, f + 2 * n + d + 1, 1);
+        max_flow.add_edge(f + 2 * n + d + 1, f + 2 * n + i, 0);
     }
-    let mut ans = 0;
-    let mut seen = vec![false; v_count];
-    loop {
-        seen.fill(false);
-        let f = dfs(
-            0,
-            f + 2 * n + d + 1,
-            10usize.pow(12),
-            v_count,
-            &mut seen,
-            &mut graph,
-        );
-        if f == 0 {
-            return ans;
-        }
-        ans += f;
-    }
-}
-
-fn dfs(
-    s: usize,
-    t: usize,
-    f: usize,
-    n: usize,
-    seen: &mut [bool],
-    graph: &mut [Vec<isize>],
-) -> usize {
-    if s == t {
-        return f;
-    }
-    seen[s] = true;
-    for i in 0..n {
-        let e = graph[s][i];
-        if !seen[i] && e > 0 {
-            let d = dfs(i, t, f.min(e as usize), n, seen, graph);
-            if d > 0 {
-                graph[s][i] -= d as isize;
-                graph[i][s] += d as isize;
-                return d;
-            }
-        }
-    }
-    0
+    max_flow.max_flow(0, f + 2 * n + d + 1)
 }
 
 #[cfg(test)]
