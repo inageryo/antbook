@@ -15,16 +15,16 @@ pub fn solve(n: usize, m: usize, matrix: &[Vec<char>]) -> usize {
         for j in 0..m {
             for s in 0..size {
                 if s & (1 << (m - 1)) == 1 << (m - 1) || matrix[i][j] == 'X' {
-                    dp[i * m + j + 1][s << 1 & (size - 1)] =
-                        (dp[i * m + j + 1][s << 1 & (size - 1)] + dp[i * m + j][s]) % M;
+                    dp[i * m + j + 1][(s << 1) & (size - 1)] =
+                        (dp[i * m + j + 1][(s << 1) & (size - 1)] + dp[i * m + j][s]) % M;
                 } else {
                     if i < n - 1 && matrix[i + 1][j] == '.' {
-                        dp[i * m + j + 1][s << 1 & (size - 1) | 1] =
-                            (dp[i * m + j + 1][s << 1 & (size - 1) | 1] + dp[i * m + j][s]) % M;
+                        dp[i * m + j + 1][(s << 1) & (size - 1) | 1] =
+                            (dp[i * m + j + 1][(s << 1) & (size - 1) | 1] + dp[i * m + j][s]) % M;
                     }
                     if j < m - 1 && matrix[i][j + 1] == '.' {
-                        dp[i * m + j + 1][s << 1 & (size - 1) | 1 << (m - 1)] = (dp[i * m + j + 1]
-                            [s << 1 & (size - 1) | 1 << (m - 1)]
+                        dp[i * m + j + 1][(s << 1) & (size - 1) | (1 << (m - 1))] = (dp
+                            [i * m + j + 1][(s << 1) & (size - 1) | (1 << (m - 1))]
                             + dp[i * m + j][s])
                             % M;
                     }

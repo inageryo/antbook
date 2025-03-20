@@ -6,7 +6,7 @@ pub fn solve(m: usize, n: usize, tiles: &[Vec<usize>]) -> Option<Vec<Vec<usize>>
     for i in 0..(1 << n) {
         let mut flip = vec![vec![0; n]; m];
         for j in 0..n {
-            flip[0][n - 1 - j] = i >> j & 1;
+            flip[0][n - 1 - j] = (i >> j) & 1;
         }
         if let Some(count) = get_count(m, n, tiles, &mut flip) {
             if num > count {
