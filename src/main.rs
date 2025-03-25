@@ -1,12 +1,12 @@
-use antbook::chapter3::section5::dual_core_cpu::solve;
+use antbook::chapter3::section5::farm_tour::solve;
 use proconio::input;
+use proconio::marker::Usize1;
 
 fn main() {
     input! {
         n: usize,
         m: usize,
-        cost_list: [(usize, usize); n],
-        exchange_cost_list: [(usize, usize, usize); m],
+        roads: [(Usize1, Usize1, usize); m],
     }
-    println!("{}", solve(n, &cost_list, &exchange_cost_list));
+    println!("{}", solve(n, &roads));
 }

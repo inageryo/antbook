@@ -3,6 +3,7 @@ pub mod bit;
 pub mod gcd;
 pub mod matrix;
 pub mod max_flow;
+pub mod min_cost_flow;
 pub mod modular;
 pub mod prime;
 pub mod rmq;
