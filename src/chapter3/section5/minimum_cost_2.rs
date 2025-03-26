@@ -1,85 +1,17 @@
-use std::cmp::Reverse;
-use std::collections::BinaryHeap;
+use crate::common::min_cost_flow::MinCostFlow;
 
-const INF: isize = 10isize.pow(12);
-#[derive(Clone)]
-struct Edge {
-    to: usize,
-    capacity: isize,
-    cost: isize,
-    rev: usize,
-}
 pub fn solve(
     n: usize,
     s: usize,
     t: usize,
     f: usize,
     network: &[(usize, usize, usize, usize)],
-) -> Option<usize> {
-    let mut graph = vec![vec![]; n];
+) -> Option<isize> {
+    let mut min_cost_flow = MinCostFlow::new(n);
     for (f, t, c, d) in network {
-        let rev1 = graph[*t].len();
-        let rev2 = graph[*f].len();
-        graph[*f].push(Edge {
-            to: *t,
-            capacity: *c as isize,
-            cost: *d as isize,
-            rev: rev1,
-        });
-        graph[*t].push(Edge {
-            to: *f,
-            capacity: 0,
-            cost: -(*d as isize),
-            rev: rev2,
-        });
+        min_cost_flow.add_edge(*f, *t, *c as isize, *d as isize);
     }
-    let mut dist = vec![0; n];
-    let mut previous_e = vec![0; n];
-    let mut previous_v = vec![0; n];
-    let mut h = vec![0; n];
-    let mut ans = 0usize;
-    let mut f = f as isize;
-    while f > 0 {
-        let mut pq = BinaryHeap::new();
-        dist.fill(INF);
-        dist[s] = 0;
-        pq.push(Reverse((0, s)));
-        while let Some(Reverse((d, v))) = pq.pop() {
-            if dist[v] < d {
-                continue;
-            }
-            for (i, e) in graph[v].iter().enumerate() {
-                if e.capacity > 0 && dist[e.to] > dist[v] + e.cost + h[v] - h[e.to] {
-                    dist[e.to] = dist[v] + e.cost + h[v] - h[e.to];
-                    previous_v[e.to] = v;
-                    previous_e[e.to] = i;
-                    pq.push(Reverse((dist[e.to], e.to)));
-                }
-            }
-        }
-        if dist[t] == INF {
-            return None;
-        }
-        for v in 0..n {
-            h[v] += dist[v];
-        }
-        let mut d = f;
-        let mut v = t;
-        while v != s {
-            d = d.min(graph[previous_v[v]][previous_e[v]].capacity);
-            v = previous_v[v];
-        }
-        f -= d;
-        ans += (d * h[t]) as usize;
-        v = t;
-        while v != s {
-            let rev = graph[previous_v[v]][previous_e[v]].rev;
-            graph[previous_v[v]][previous_e[v]].capacity -= d;
-            graph[v][rev].capacity += d;
-            v = previous_v[v];
-        }
-    }
-    Some(ans)
+    min_cost_flow.min_cost_flow(s, t, f as isize)
 }
 
 #[cfg(test)]
@@ -97,7 +29,7 @@ mod tests {
         #[case] t: usize,
         #[case] f: usize,
         #[case] network: &[(usize, usize, usize, usize)],
-        #[case] expected: Option<usize>,
+        #[case] expected: Option<isize>,
     ) {
         assert_eq!(expected, solve(n, s, t, f, network));
     }

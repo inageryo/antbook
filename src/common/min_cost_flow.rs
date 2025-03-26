@@ -20,7 +20,6 @@ struct Edge {
 }
 
 impl MinCostFlow {
-    // fixme: refactor
     pub fn new(n: usize) -> Self {
         MinCostFlow {
             n,
