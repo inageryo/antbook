@@ -5,16 +5,16 @@ const INF: isize = 10isize.pow(12);
 
 pub struct MinCostFlow {
     n: usize,
-    graph: Vec<Vec<Edge>>,
+    pub graph: Vec<Vec<Edge>>,
     dist: Vec<isize>,
     previous_e: Vec<usize>,
     previous_v: Vec<usize>,
     h: Vec<isize>,
 }
-#[derive(Clone)]
-struct Edge {
+#[derive(Clone, Debug)]
+pub struct Edge {
     to: usize,
-    capacity: isize,
+    pub capacity: isize,
     cost: isize,
     rev: usize,
 }

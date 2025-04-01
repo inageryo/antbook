@@ -1,12 +1,26 @@
-use antbook::chapter3::section5::farm_tour::solve;
+use antbook::chapter3::section5::evacuation_plan::solve;
 use proconio::input;
-use proconio::marker::Usize1;
 
 fn main() {
     input! {
         n: usize,
         m: usize,
-        roads: [(Usize1, Usize1, usize); m],
+        bills: [(isize, isize, usize); n],
+        shelters: [(isize, isize, usize); m],
+        plan: [[usize; m]; n]
     }
-    println!("{}", solve(n, &roads));
+    if let Some(op) = solve(n, m, &bills, &shelters, &plan) {
+        println!("SUBOPTIMAL");
+        for r in op.iter() {
+            for (i, c) in r.iter().enumerate() {
+                if i < r.len() - 1 {
+                    print!("{} ", c);
+                } else {
+                    println!("{}", c);
+                }
+            }
+        }
+    } else {
+        println!("OPTIONAL");
+    }
 }
