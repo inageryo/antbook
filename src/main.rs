@@ -1,4 +1,4 @@
-use antbook::chapter3::section5::evacuation_plan::solve;
+use antbook::chapter3::section5::evacuation_plan_2::solve;
 use proconio::input;
 
 fn main() {
