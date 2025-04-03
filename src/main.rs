@@ -1,11 +1,11 @@
-use antbook::chapter3::section5::the_windys::solve;
+use antbook::chapter3::section5::intervals::solve;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        m: usize,
-        z_list: [[usize; m]; n]
+        k: usize,
+        intervals: [(usize, usize, usize); n]
     }
-    println!("{:.6}", solve(n, m, &z_list))
+    println!("{}", solve(n, k, &intervals))
 }
