@@ -87,22 +87,37 @@ mod tests {
 
     use super::*;
 
+    struct IntParameter {
+        w: usize,
+        h: usize,
+        n: usize,
+    }
+
     #[rstest]
-    #[case(10, 10, 5, &mut [1, 1, 4, 9, 10], &mut [6, 10, 4, 9, 10], &mut [4, 8, 1, 1, 6], &mut [4, 8, 10, 5, 10], 6)]
-    #[case(1, 1, 1, &mut [1], &mut [1], &mut [1], &mut [1], 0)]
-    #[case(10, 20, 2, &mut [5, 1], &mut [5, 10], &mut [1, 10], &mut [20, 10], 4)]
-    #[case(1_000_000, 1_000_000, 1, &mut [1], &mut [1], &mut [1], &mut [100], 1)]
-    #[case(1_000_000, 1_000_000, 5, &mut [1, 1, 400_000, 999_999, 1_000_000], &mut [600_000, 1_000_000, 400_000, 999_999, 1_000_000], &mut [400_000, 800_000, 1, 1, 600_000], &mut [400_000, 800_000, 1_000_000, 599_999, 1_000_000], 6)]
+    #[case(IntParameter {w: 10, h: 10, n: 5}, &mut [1, 1, 4, 9, 10], &mut [6, 10, 4, 9, 10], &mut [4, 8, 1, 1, 6], &mut [4, 8, 10, 5, 10], 6)]
+    #[case(IntParameter {w: 1, h: 1, n: 1}, &mut [1], &mut [1], &mut [1], &mut [1], 0)]
+    #[case(IntParameter {w: 10, h: 20, n: 2}, &mut [5, 1], &mut [5, 10], &mut [1, 10], &mut [20, 10], 4)]
+    #[case(IntParameter {w: 1_000_000, h: 1_000_000, n: 1}, &mut [1], &mut [1], &mut [1], &mut [100], 1)]
+    #[case(IntParameter {w: 1_000_000, h: 1_000_000, n: 5}, &mut [1, 1, 400_000, 999_999, 1_000_000], &mut [600_000, 1_000_000, 400_000, 999_999, 1_000_000], &mut [400_000, 800_000, 1, 1, 600_000], &mut [400_000, 800_000, 1_000_000, 599_999, 1_000_000], 6)]
     fn it_works(
-        #[case] w: usize,
-        #[case] h: usize,
-        #[case] n: usize,
+        #[case] int_parameter: IntParameter,
         #[case] x1: &mut [usize],
         #[case] x2: &mut [usize],
         #[case] y1: &mut [usize],
         #[case] y2: &mut [usize],
         #[case] expected: usize,
     ) {
-        assert_eq!(expected, solve(w, h, n, x1, x2, y1, y2));
+        assert_eq!(
+            expected,
+            solve(
+                int_parameter.w,
+                int_parameter.h,
+                int_parameter.n,
+                x1,
+                x2,
+                y1,
+                y2
+            )
+        );
     }
 }

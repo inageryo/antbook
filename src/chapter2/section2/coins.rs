@@ -30,21 +30,23 @@ mod tests {
 
     use super::*;
 
+    struct Coin {
+        c1: usize,
+        c5: usize,
+        c10: usize,
+        c50: usize,
+        c100: usize,
+        c500: usize,
+    }
+
     #[rstest]
-    #[case(3, 2, 1, 3, 0, 2, 620, 6)]
-    #[case(3, 2, 1, 3, 1, 2, 620, 5)]
-    #[case(500, 200, 100, 300, 10, 2, 500, 1)]
-    fn it_works(
-        #[case] c1: usize,
-        #[case] c5: usize,
-        #[case] c10: usize,
-        #[case] c50: usize,
-        #[case] c100: usize,
-        #[case] c500: usize,
-        #[case] a: usize,
-        #[case] expected: usize,
-    ) {
-        let result = solve(c1, c5, c10, c50, c100, c500, a);
+    #[case(Coin {c1: 3, c5: 2, c10: 1, c50: 3, c100: 0, c500: 2}, 620, 6)]
+    #[case(Coin {c1: 3, c5: 2, c10: 1, c50: 3, c100: 1, c500: 2}, 620, 5)]
+    #[case(Coin {c1: 500, c5: 200, c10: 100, c50: 300, c100: 10, c500: 2}, 500, 1)]
+    fn it_works(#[case] coin: Coin, #[case] a: usize, #[case] expected: usize) {
+        let result = solve(
+            coin.c1, coin.c5, coin.c10, coin.c50, coin.c100, coin.c500, a,
+        );
         assert_eq!(expected, result);
     }
 }

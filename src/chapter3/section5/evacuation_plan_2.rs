@@ -83,6 +83,6 @@ mod tests {
         #[case] plan: &[Vec<usize>],
         #[case] expected: Option<Vec<Vec<usize>>>,
     ) {
-        assert_eq!(expected, solve(n, m, &bills, &shelters, &plan));
+        assert_eq!(expected, solve(n, m, bills, shelters, plan));
     }
 }

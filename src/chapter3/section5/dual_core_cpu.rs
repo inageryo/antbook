@@ -35,6 +35,6 @@ mod tests {
         #[case] exchange_cost_list: &[(usize, usize, usize)],
         #[case] expected: usize,
     ) {
-        assert_eq!(expected, solve(n, &cost_list, &exchange_cost_list));
+        assert_eq!(expected, solve(n, cost_list, exchange_cost_list));
     }
 }
