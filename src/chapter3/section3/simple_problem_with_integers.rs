@@ -19,8 +19,7 @@ pub fn solve(
         bit1.add(i + 1, -(*e as isize));
     }
     let mut ans = vec![];
-    for i in 0..q 
-    {
+    for i in 0..q {
         let l = l_list[i] + 1;
         let r = r_list[i] + 1;
         let x = x_list[i] as isize;
