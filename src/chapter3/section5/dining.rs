@@ -49,9 +49,6 @@ mod tests {
         #[case] drink_preference: &[(usize, usize)],
         #[case] expected: usize,
     ) {
-        assert_eq!(
-            expected,
-            solve(n, f, d, &food_preference, &drink_preference)
-        );
+        assert_eq!(expected, solve(n, f, d, food_preference, drink_preference));
     }
 }

@@ -84,6 +84,6 @@ mod tests {
         #[case] field: &[Vec<char>],
         #[case] expected: Option<usize>,
     ) {
-        assert_eq!(expected, solve(x, y, &field));
+        assert_eq!(expected, solve(x, y, field));
     }
 }

@@ -26,6 +26,6 @@ mod tests {
         #[case] roads: &[(usize, usize, usize)],
         #[case] expected: usize,
     ) {
-        assert_eq!(solve(n, &roads), expected);
+        assert_eq!(solve(n, roads), expected);
     }
 }
