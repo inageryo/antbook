@@ -1,20 +1,16 @@
-use antbook::chapter3::section6::jack_straws::solve;
+use antbook::chapter3::section6::white_bird::solve;
 use proconio::input;
-use proconio::marker::Usize1;
 
 fn main() {
     input! {
         n: usize,
-        p_list: [(isize, isize); n],
-        q_list: [(isize, isize); n],
-        m: usize,
-        ab_list: [(Usize1, Usize1); m]
+        v: f64,
+        (x, y): (f64, f64),
+        obstacle_list: [(f64, f64, f64, f64); n]
     }
-    for b in solve(n, &p_list, &q_list, &ab_list) {
-        if b {
-            println!("CONNECTED")
-        } else {
-            println!("NOT CONNECTED")
-        }
+    if solve(v, x, y, &obstacle_list) {
+        println!("Yes");
+    } else {
+        println!("No");
     }
 }
