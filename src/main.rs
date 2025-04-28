@@ -1,16 +1,13 @@
-use antbook::chapter3::section6::white_bird::solve;
+use antbook::chapter3::section6::coneology::solve;
+use itertools::Itertools;
 use proconio::input;
 
 fn main() {
     input! {
         n: usize,
-        v: f64,
-        (x, y): (f64, f64),
-        obstacle_list: [(f64, f64, f64, f64); n]
+        circle_list: [(f64, f64, f64); n]
     }
-    if solve(v, x, y, &obstacle_list) {
-        println!("Yes");
-    } else {
-        println!("No");
-    }
+    let ans = solve(n, &circle_list);
+    println!("{}", ans.len());
+    println!("{}", ans.iter().map(|e| { *e + 1 }).format(" "));
 }
