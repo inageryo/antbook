@@ -28,6 +28,58 @@ pub fn solve(n: usize, points: &[(isize, isize)]) -> usize {
         .map(|&(x1, y1)| Point { x: x1, y: y1 })
         .collect::<Vec<_>>();
     points.sort();
+    let convex_hull = get_convex_hull(n, &points);
+    let mut ans = 0;
+    for (i, p1) in convex_hull.iter().enumerate() {
+        for p2 in convex_hull.iter().take(i) {
+            ans = ans.max(get_power_of_distance(p1, p2));
+        }
+    }
+    ans
+}
+
+pub fn solve2(n: usize, points: &[(isize, isize)]) -> usize {
+    let mut points = points
+        .iter()
+        .map(|&(x1, y1)| Point { x: x1, y: y1 })
+        .collect::<Vec<_>>();
+    points.sort();
+    let convex_hull = get_convex_hull(n, &points);
+    let len = convex_hull.len();
+    if len == 2 {
+        return get_power_of_distance(&convex_hull[0], &convex_hull[1]);
+    }
+    let mut i = 0usize;
+    let mut j = 0usize;
+    for (k, e) in convex_hull.iter().enumerate() {
+        if convex_hull[i] >= *e {
+            i = k;
+        }
+        if convex_hull[j] < *e {
+            j = k;
+        }
+    }
+    let mut ans = 0;
+    let si = i;
+    let sj = j;
+    while i != sj || j != si {
+        ans = ans.max(get_power_of_distance(&convex_hull[i], &convex_hull[j]));
+        if get_outer_product2(
+            &convex_hull[(i + 1) % len],
+            &convex_hull[i],
+            &convex_hull[j],
+            &convex_hull[(j + 1) % len],
+        ) < 0
+        {
+            i = (i + 1) % len;
+        } else {
+            j = (j + 1) % len;
+        }
+    }
+    ans
+}
+
+fn get_convex_hull(n: usize, points: &[Point]) -> Vec<Point> {
     let mut convex_hull = vec![Point { x: 0, y: 0 }; n * 2];
     let mut k = 0usize;
     for point in points.iter() {
@@ -46,13 +98,7 @@ pub fn solve(n: usize, points: &[(isize, isize)]) -> usize {
         k += 1;
     }
     convex_hull.resize(k - 1, Point { x: 0, y: 0 });
-    let mut ans = 0;
-    for (i, p1) in convex_hull.iter().enumerate() {
-        for p2 in convex_hull.iter().take(i) {
-            ans = ans.max(get_power_of_distance(p1, p2));
-        }
-    }
-    ans
+    convex_hull
 }
 
 fn get_outer_product(p1: &Point, p2: &Point, p3: &Point) -> isize {
@@ -60,6 +106,14 @@ fn get_outer_product(p1: &Point, p2: &Point, p3: &Point) -> isize {
     let b = p2.y - p1.y;
     let c = p3.x - p1.x;
     let d = p3.y - p1.y;
+    a * d - b * c
+}
+
+fn get_outer_product2(p1: &Point, p2: &Point, p3: &Point, p4: &Point) -> isize {
+    let a = p2.x - p1.x;
+    let b = p2.y - p1.y;
+    let c = p4.x - p3.x;
+    let d = p4.y - p3.y;
     a * d - b * c
 }
 
@@ -82,5 +136,6 @@ mod tests {
     #[case(3, &[(0, 0), (1, 1), (2, 2)], 8)]
     fn it_works(#[case] n: usize, #[case] points: &[(isize, isize)], #[case] expected: usize) {
         assert_eq!(expected, solve(n, points));
+        assert_eq!(expected, solve2(n, points));
     }
 }
