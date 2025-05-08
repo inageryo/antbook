@@ -1,4 +1,17 @@
+// fixme: refactor
 pub fn mod_mul(a: &[Vec<usize>], b: &[Vec<usize>], m: usize) -> Vec<Vec<usize>> {
+    let mut res = vec![vec![0; b[0].len()]; a.len()];
+    for i in 0..a.len() {
+        for k in 0..b.len() {
+            for j in 0..b[0].len() {
+                res[i][j] = (res[i][j] + a[i][k] * b[k][j]) % m;
+            }
+        }
+    }
+    res
+}
+
+pub fn mod_mul_isize(a: &[Vec<isize>], b: &[Vec<isize>], m: isize) -> Vec<Vec<isize>> {
     let mut res = vec![vec![0; b[0].len()]; a.len()];
     for i in 0..a.len() {
         for k in 0..b.len() {
@@ -22,6 +35,23 @@ pub fn mod_pow(a: &[Vec<usize>], n: usize, m: usize) -> Vec<Vec<usize>> {
             res = mod_mul(&res, &a, m);
         }
         a = mod_mul(&a, &a, m);
+        n >>= 1;
+    }
+    res
+}
+
+pub fn mod_pow_isize(a: &[Vec<isize>], n: usize, m: isize) -> Vec<Vec<isize>> {
+    let mut res = vec![vec![0; a.len()]; a.len()];
+    for (i, resi) in res.iter_mut().enumerate() {
+        resi[i] = 1;
+    }
+    let mut a = a.to_vec();
+    let mut n = n;
+    while n > 0 {
+        if n & 1 == 1 {
+            res = mod_mul_isize(&res, &a, m);
+        }
+        a = mod_mul_isize(&a, &a, m);
         n >>= 1;
     }
     res
@@ -68,7 +98,7 @@ mod tests {
     #[case(&[vec![1, 1], vec![1, 0]], 3, 10, vec![vec![3, 2], vec![2, 1]])]
     #[case(&[vec![1, 1], vec![1, 0]], 10, 100, vec![vec![89, 55], vec![55, 34]])]
     #[case(&[vec![1, 1], vec![1, 0]], 10, 10, vec![vec![9, 5], vec![5, 4]])]
-    fn mod_mow_works(
+    fn mod_pow_works(
         #[case] a: &[Vec<usize>],
         #[case] n: usize,
         #[case] m: usize,
