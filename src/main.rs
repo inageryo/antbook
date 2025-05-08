@@ -1,12 +1,9 @@
-use antbook::chapter3::section6::intersection_of_two_prisms::solve;
+use antbook::chapter3::section7::numbers::solve;
 use proconio::input;
 
 fn main() {
     input! {
-        m: usize,
-        n: usize,
-        p1_list: [(f64, f64); m],
-        p2_list: [(f64, f64); n],
+        n: usize
     }
-    println!("{}", solve(&p1_list, &p2_list));
+    println!("{}", solve(n));
 }
