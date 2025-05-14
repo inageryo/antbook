@@ -1,4 +1,3 @@
-// fixme: refactor
 pub fn mod_mul(a: &[Vec<usize>], b: &[Vec<usize>], m: usize) -> Vec<Vec<usize>> {
     let mut res = vec![vec![0; b[0].len()]; a.len()];
     for i in 0..a.len() {
@@ -90,6 +89,21 @@ mod tests {
     }
 
     #[rstest]
+    #[case(&[vec![1, 2, 3]], &[vec![4], vec![5], vec![6]], 100, vec![vec![32]])]
+    #[case(&[vec![1, 2, 3]], &[vec![4], vec![5], vec![6]], 10, vec![vec![2]])]
+    #[case(&[vec![1, 2, 3]], &[vec![4], vec![5], vec![-6]], 10, vec![vec![-4]])]
+    #[case(&[vec![1, 2, 3]], &[vec![4], vec![-5], vec![-6]], 10, vec![vec![-4]])]
+    #[case(&[vec![1, 2, 3]], &[vec![4], vec![-5], vec![-6]], 100, vec![vec![-24]])]
+    fn mod_mul_isize_works(
+        #[case] a: &[Vec<isize>],
+        #[case] b: &[Vec<isize>],
+        #[case] m: isize,
+        #[case] expected: Vec<Vec<isize>>,
+    ) {
+        assert_eq!(expected, mod_mul_isize(a, b, m));
+    }
+
+    #[rstest]
     #[case(&[vec![1]], 1, 10, vec![vec![1]])]
     #[case(&[vec![1]], 10, 10, vec![vec![1]])]
     #[case(&[vec![1, 1], vec![1, 0]], 0, 10, vec![vec![1, 0], vec![0, 1]])]
@@ -105,6 +119,25 @@ mod tests {
         #[case] expected: Vec<Vec<usize>>,
     ) {
         assert_eq!(expected, mod_pow(a, n, m));
+    }
+
+    #[rstest]
+    #[case(&[vec![1, 1], vec![1, 0]], 0, 10, vec![vec![1, 0], vec![0, 1]])]
+    #[case(&[vec![1, 1], vec![1, 0]], 1, 10, vec![vec![1, 1], vec![1, 0]])]
+    #[case(&[vec![1, 1], vec![1, 0]], 2, 10, vec![vec![2, 1], vec![1, 1]])]
+    #[case(&[vec![1, 1], vec![1, 0]], 3, 10, vec![vec![3, 2], vec![2, 1]])]
+    #[case(&[vec![1, 1], vec![-1, 0]], 3, 10, vec![vec![-1, 0], vec![0, -1]])]
+    #[case(&[vec![1, 1], vec![1, 0]], 10, 100, vec![vec![89, 55], vec![55, 34]])]
+    #[case(&[vec![1, 1], vec![1, 0]], 10, 10, vec![vec![9, 5], vec![5, 4]])]
+    #[case(&[vec![1, 1], vec![-2, 0]], 10, 100, vec![vec![23, -11], vec![22, 34]])]
+    #[case(&[vec![1, 1], vec![-2, 0]], 10, 10, vec![vec![3, -1], vec![-8, 4]])]
+    fn mod_pow_isize_works(
+        #[case] a: &[Vec<isize>],
+        #[case] n: usize,
+        #[case] m: isize,
+        #[case] expected: Vec<Vec<isize>>,
+    ) {
+        assert_eq!(expected, mod_pow_isize(a, n, m));
     }
 
     #[rstest]
