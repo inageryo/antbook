@@ -1,9 +1,12 @@
-use antbook::chapter3::section7::numbers::solve;
+use antbook::chapter3::section7::no_cheating::solve;
 use proconio::input;
+use proconio::marker::Chars;
 
 fn main() {
     input! {
-        n: usize
+        m: usize,
+        n: usize,
+        seats: [Chars; m]
     }
-    println!("{}", solve(n));
+    println!("{}", solve(m, n, &seats));
 }
