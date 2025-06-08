@@ -3,7 +3,7 @@ use crate::common::bipartile_graph::BipartileGraph;
 pub fn solve(n: usize, positions: &[(usize, usize)]) -> usize {
     let mut bg = BipartileGraph::new(2 * n);
     for &(x, y) in positions.iter() {
-        bg.add_edge(x, y);
+        bg.add_edge(x, n + y);
     }
     bg.bipartile_matching()
 }

@@ -25,7 +25,7 @@ impl BipartileGraph {
         for i in 0..self.graph[v].len() {
             let e = self.graph[v][i];
             let m = self.matching[e];
-            if m < 0 || self.used[m as usize] && self.dfs(m as usize) {
+            if m < 0 || !self.used[m as usize] && self.dfs(m as usize) {
                 self.matching[v] = e as isize;
                 self.matching[e] = v as isize;
                 return true;
@@ -75,6 +75,11 @@ mod tests {
         graph.add_edge(0, 4);
         graph.add_edge(1, 5);
         graph.add_edge(2, 5);
+        assert_eq!(2, graph.bipartile_matching());
+        let mut graph = BipartileGraph::new(6);
+        graph.add_edge(0, 4);
+        graph.add_edge(0, 5);
+        graph.add_edge(2, 4);
         assert_eq!(2, graph.bipartile_matching());
     }
 }
